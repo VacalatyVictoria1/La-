@@ -239,6 +239,72 @@ int main()
 
 
 
+#include <iostream>
+#include <math.h>
+#include <stdlib.h>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+void Input(int* input, string& num)
+{
+    tryagain:
+
+    cout << "Enter the number in octal notation: ";
+    cin >> num;
+
+    if (num[6] != char(0))
+    {
+        cout << "Error!" << endl;
+        goto tryagain;
+    }
+
+    char a = num[0],  b = num[1], c = num[2], d = num[3],  e = num[4],  f = num[5];
+    
+    int A = atoi(&a);
+    int B = atoi(&b);
+    int C = atoi(&c);
+    int D = atoi(&d);
+    int E = atoi(&e);
+    int F = atoi(&f);
+
+    input[0] = A;
+    input[1] = B;
+    input[2] = C;
+    input[3] = D;
+    input[4] = E;
+    input[5] = F;
+
+    for (int i = 0; i < 6; i++)
+    {
+        if (input[i] >= 8)
+        {
+            cout << "You need to enter numbers in octal notation !!! \n\n";
+            goto tryagain;
+        }
+    }
+}
+
+int main()
+{
+    string num;
+    int* input = new int[5];
+    Input(input, num);
+        int j = 5;
+    int Result = 0;
+    double p = 8;
+    for (int i = 0; i < 6; i++)
+    {
+        Result += input[i] * (pow(p, j));
+        j--;
+    }
+    cout << "Result: " << Result;
+
+    ofstream fout("input.txt"); 
+    fout << Result; 
+    fout.close(); 
+}
 
 
 
